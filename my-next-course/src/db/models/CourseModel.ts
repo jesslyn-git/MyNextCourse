@@ -1,0 +1,55 @@
+import { ObjectId } from "mongodb";
+import { getDb } from "../config/mongodb";
+import { z } from "zod";
+
+export type Course = {
+  title: string;
+  slug: string;
+  description?: string;
+  excerpt?: string;
+  price: number;
+  tags?: string[];
+  thumbnail: string;
+  images?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+// const CourseValidation = z.object({
+//   title: z.string().min(1, "Title is required"),
+//   slug: z.string().min(1, "Slug is required"),
+//   price: z.number().positive("Price must be a positive number"),
+//   thumbnail: z.string().min(1, "Thumbnail is required"),
+// });
+
+export default class CourseModel {
+  static getCollecton() {
+    const db = getDb();
+
+    const collection = db.collection<Course>("courses");
+
+    return collection;
+  }
+
+  static async findAll() {
+    const collection = this.getCollecton();
+    const courses = await collection.find().toArray();
+    return courses;
+  }
+
+  static async findById(id: ObjectId) {
+    const collection = this.getCollecton();
+
+    const course = await collection.findOne({ _id: id });
+
+    return course;
+  }
+
+  static async findByTitle(title: string) {
+    const collection = this.getCollecton();
+
+    const courses = await collection.findOne({ title });
+
+    return courses;
+  }
+}
