@@ -7,6 +7,7 @@ export type Course = {
   slug: string;
   description?: string;
   excerpt?: string;
+  category?: string;
   price: number;
   tags?: string[];
   thumbnail: string;
@@ -23,7 +24,7 @@ export type Course = {
 // });
 
 export default class CourseModel {
-  static getCollecton() {
+  static getCollection() {
     const db = getDb();
 
     const collection = db.collection<Course>("courses");
@@ -32,13 +33,13 @@ export default class CourseModel {
   }
 
   static async findAll() {
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
     const courses = await collection.find().toArray();
     return courses;
   }
 
   static async findById(id: ObjectId) {
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
 
     const course = await collection.findOne({ _id: id });
 
@@ -46,7 +47,7 @@ export default class CourseModel {
   }
 
   static async findByTitle(title: string) {
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
 
     const courses = await collection.findOne({ title });
 

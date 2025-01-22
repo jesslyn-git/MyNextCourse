@@ -1,18 +1,50 @@
-"use client"
+"use client";
 
-import { deleteUser } from "./actions"
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 type Props = {
-  id: string
-}
+  productId: string;
+  userId: string;
+};
 
-export default function DeleteButton({ id }: Props) {
+export default function AddWishlistButton({ productId, userId }: Props) {
+  const [loading, setLoading] = useState(false);
 
-  const handleDelete = async () => {
-    const result = await deleteUser(id)
+  const handleAdd = async () => {
+    if (!userId) {
+      toast.error("You need to log in first!");
+      return;
+    }
 
-    console.log(result)
-  }
+    setLoading(true);
 
-  return <button onClick={handleDelete}>Delete</button>
+    try {
+      const res = await fetch("/api/wishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, productId }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to add to wishlist");
+      }
+
+      toast.success("✅ Added to Wishlist!");
+    } catch (error: any) {
+      toast.error(`❌ ${error.message || "Something went wrong"}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleAdd} disabled={loading}>
+        {loading ? "Adding..." : "Add to Wishlist"}
+      </button>
+    </div>
+  );
 }

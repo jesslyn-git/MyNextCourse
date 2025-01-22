@@ -17,7 +17,7 @@ const UserValidation = z.object({
 });
 
 export default class UserModel {
-  static getCollecton() {
+  static getCollection() {
     const db = getDb();
 
     const collection = db.collection<User>("users");
@@ -26,13 +26,13 @@ export default class UserModel {
   }
 
   static async findAll() {
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
     const users = await collection.find().toArray();
     return users;
   }
 
   static async findById(id: ObjectId) {
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
 
     const user = await collection.findOne({ _id: id });
 
@@ -42,7 +42,7 @@ export default class UserModel {
   static async insertOne(payload: User) {
     UserValidation.parse(payload);
 
-    const collection = this.getCollecton();
+    const collection = this.getCollection();
     await collection.insertOne(payload);
 
     return "User has been created";
