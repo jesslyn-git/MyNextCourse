@@ -1,40 +1,79 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function RegisterPage() {
-  async function handleRegister(formData: FormData) {
-    "use server";
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const body = { name, email, password };
+  async function handleRegister(e: React.FormEvent) {
+    e.preventDefault();
 
-    const resp = await fetch("http://localhost:3000/api/register", {
+    const resp = await fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(formData),
     });
 
-    const data = await resp.json();
+    if (!resp.ok) {
+      console.error("Registration failed");
+      return;
+    }
 
-    console.log(data, "ini client");
+    router.push("/login");
   }
 
   return (
     <div>
-      <h1>RegisterPage</h1>
-      <form action={handleRegister}>
+      <h1>Register Page</h1>
+      <form onSubmit={handleRegister}>
         <label>Name</label>
-        <input name="name" />
+        <input
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <br />
+        <label>Username</label>
+        <input
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
         <br />
         <label>Email</label>
-        <input name="email" />
+        <input
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
         <br />
         <label>Password</label>
-        <input name="password" />
+        <input
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
         <br />
-        <input type="submit" value="Register" />
+        <button type="submit">Register</button>
       </form>
     </div>
   );

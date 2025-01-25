@@ -1,49 +1,71 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
-  async function handleLogin(formData: FormData) {
-    "use server";
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const body = { email, password };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const resp = await fetch("http://localhost:3000/api/login", {
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+
+    const resp = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(formData),
+      credentials: "include", // ✅ Allows cookies to be stored from the API response
     });
 
     if (!resp.ok) {
       const data = await resp.json();
-
-      console.log(data, "<<<< ini errr");
-
+      console.log(data, "<<<< Login error");
+      toast.error("Invalid email or password");
       return;
     }
 
     const data = await resp.json();
-    const cookieStore = await cookies();
-    cookieStore.set("access_token", data.token);
+    console.log("Login berhasil");
 
-    redirect("/user");
+    toast.success("Login success!");
+
+    router.push("/");
   }
 
   return (
     <div>
-      <h1>LoginPage</h1>
+      <h1>Login Page</h1>
 
-      <form action={handleLogin}>
+      <form onSubmit={handleLogin}>
         <label>Email</label>
-        <input name="email" />
+        <input
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
         <br />
         <label>Password</label>
-        <input name="password" />
+        <input
+          name="password"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
         <br />
-        <input type="submit" value="Login" />
+        <button type="submit">Login</button>
       </form>
     </div>
   );

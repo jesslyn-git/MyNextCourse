@@ -8,22 +8,18 @@ type Props = {
   userId: string;
 };
 
-export default function AddWishlistButton({ productId, userId }: Props) {
+export default function AddToWishlistButton({ productId }: Props) {
   const [loading, setLoading] = useState(false);
 
   const handleAdd = async () => {
-    if (!userId) {
-      toast.error("You need to log in first!");
-      return;
-    }
-
     setLoading(true);
 
     try {
-      const res = await fetch("/api/wishlist", {
+      const res = await fetch("/api/wishlists", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, productId }),
+        body: JSON.stringify({ productId }),
+        credentials: "include",
       });
 
       const data = await res.json();

@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/config/mongodb";
+import { getDb } from "@/db/config/mongodb";
 
 export async function GET(req: NextRequest) {
   try {
-    const db = getDb();
+    // console.log("in the API ");
+
+    const db = await getDb();
     const collection = db.collection("courses");
 
     const { searchParams } = new URL(req.url);
@@ -21,6 +23,7 @@ export async function GET(req: NextRequest) {
       .limit(limit)
       .toArray();
 
+    // console.log("🚀 ~ GET ~ courses:", courses);
     return NextResponse.json({
       courses,
       page,

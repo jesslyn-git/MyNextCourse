@@ -15,8 +15,8 @@ const WishlistValidation = z.object({
 });
 
 export default class WishlistModel {
-  static getCollection() {
-    const db = getDb();
+  static async getCollection() {
+    const db = await getDb();
 
     const collection = db.collection<Wishlist>("wishlists");
 
@@ -24,15 +24,15 @@ export default class WishlistModel {
   }
 
   static async findAll() {
-    const collection = this.getCollection();
+    const collection = await this.getCollection();
     const wishlists = await collection.find().toArray();
     return wishlists;
   }
 
-  static async findById(id: ObjectId) {
-    const collection = this.getCollection();
+  static async findByUserId(userId: string, productId: string) {
+    const collection = await this.getCollection();
 
-    const wishlist = await collection.findOne({ _id: id });
+    const wishlist = await collection.findOne({ userId, productId });
 
     return wishlist;
   }
@@ -40,14 +40,14 @@ export default class WishlistModel {
   static async insertOne(payload: Wishlist) {
     WishlistValidation.parse(payload);
 
-    const collection = this.getCollection();
+    const collection = await this.getCollection();
     await collection.insertOne(payload);
 
     return "Wishlist has been added";
   }
 
   static async deleteOne(id: ObjectId) {
-    const collection = this.getCollection();
+    const collection = await this.getCollection();
 
     await collection.deleteOne({ _id: id });
 
