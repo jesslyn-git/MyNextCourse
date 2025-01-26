@@ -1,0 +1,72 @@
+/* [project]/src/app/products/products.module.css [app-client] (css) */
+.products-module__E8alaG__container {
+  min-height: 100vh;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.products-module__E8alaG__title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.products-module__E8alaG__searchInput {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  transition: border-color .3s;
+}
+
+.products-module__E8alaG__searchInput:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.products-module__E8alaG__productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(384px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.products-module__E8alaG__container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.products-module__E8alaG__productGrid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.products-module__E8alaG__productGrid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.products-module__E8alaG__productGrid::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.products-module__E8alaG__loader {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+/*# sourceMappingURL=src_app_products_products_module_b52d8e.css.map*/

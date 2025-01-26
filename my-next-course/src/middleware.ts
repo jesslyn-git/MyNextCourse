@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import dotenv from "dotenv";
-dotenv.config();
 
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/api/wishlists")) {
