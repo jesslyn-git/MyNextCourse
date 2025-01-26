@@ -1,12 +1,11 @@
 import type { NextConfig } from "next";
-import dotenv from "dotenv";
-dotenv.config();
 
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   env: {
-    BASE_URL: process.env.BASE_URL || "http://localhost:3000",
+    NEXT_PUBLIC_BASE_URL:
+      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

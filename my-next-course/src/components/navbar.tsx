@@ -17,7 +17,6 @@ const Navbar = () => {
   useEffect(() => {
     const checkAuthStatus = () => {
       if (typeof window !== "undefined") {
-        // ✅ Ensure localStorage is accessible
         const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
         setIsLoggedIn(isAuthenticated);
         setUser(localStorage.getItem("user") || ""); // ✅ Fetch user safely
