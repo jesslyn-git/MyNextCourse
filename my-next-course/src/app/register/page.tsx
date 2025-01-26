@@ -12,6 +12,7 @@ import {
   CardBody,
 } from "@material-tailwind/react";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -136,7 +137,7 @@ export default function RegisterPage() {
             color="blue-gray"
             className="flex items-center justify-center gap-3"
           >
-            <img src="/google.svg" alt="google" className="h-5 w-5" />
+            <Image src="/google.svg" alt="google" className="h-5 w-5" />
             Continue with Google
           </Button>
         </CardBody>

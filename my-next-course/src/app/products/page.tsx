@@ -1,16 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardComponent from "@/components/Card";
 import styles from "./products.module.css";
+import { Course } from "@/db/models/CourseModel";
 
 export default function ProductPage() {
   const router = useRouter();
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Course[]>([]);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [hasMore, setHasMore] = useState(true);
@@ -27,34 +28,37 @@ export default function ProductPage() {
   }, []);
 
   // ✅ Fetch Products (Supports Pagination & Search)
-  const fetchProducts = async (currentPage: number, reset = false) => {
-    try {
-      console.log("trying to fetch");
+  const fetchProducts = useCallback(
+    async (currentPage: number, reset = false) => {
+      try {
+        console.log("trying to fetch");
 
-      const res = await fetch(
-        `/api/courses?page=${currentPage}&limit=6&search=${searchQuery}`,
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      //   console.log("🚀 ~ fetchProducts ~ res:", res);
+        const res = await fetch(
+          `/api/courses?page=${currentPage}&limit=6&search=${searchQuery}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        //   console.log("🚀 ~ fetchProducts ~ res:", res);
 
-      if (!res.ok) throw new Error("Failed to fetch products");
+        if (!res.ok) throw new Error("Failed to fetch products");
 
-      const data = await res.json();
-      console.log("🚀 ~ fetchProducts ~ data:", data);
+        const data = await res.json();
+        console.log("🚀 ~ fetchProducts ~ data:", data);
 
-      setProducts((prev) =>
-        reset ? data.courses : [...prev, ...data.courses]
-      );
-      setPage(currentPage + 1);
-      setHasMore(data.courses.length > 0);
-    } catch (error) {
-      console.error("🚀 ~ fetchProducts ~ error:", error);
-      toast.error("Error loading products");
-    }
-  };
+        setProducts((prev) =>
+          reset ? data.courses : [...prev, ...data.courses]
+        );
+        setPage(currentPage + 1);
+        setHasMore(data.courses.length > 0);
+      } catch (error) {
+        console.error("🚀 ~ fetchProducts ~ error:", error);
+        toast.error("Error loading products");
+      }
+    },
+    [searchQuery]
+  );
 
   // ✅ Debounce Search (Prevents API Overload)
   useEffect(() => {
@@ -63,7 +67,7 @@ export default function ProductPage() {
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [searchQuery]);
+  }, [searchQuery, fetchProducts]);
 
   // ✅ Add to Wishlist
   const handleAddToWishlist = async (productId: string) => {

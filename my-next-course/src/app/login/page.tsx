@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardBody,
 } from "@material-tailwind/react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -144,7 +145,7 @@ export default function LoginPage() {
             color="blue-gray"
             className="flex items-center justify-center gap-3"
           >
-            <img src="/google.svg" alt="google" className="h-5 w-5" />
+            <Image src="/google.svg" alt="google" className="h-5 w-5" />
             Continue with Google
           </Button>
         </CardBody>

@@ -3,7 +3,7 @@ import { getDb } from "@/db/config/mongodb";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { productId: string } }
+  { params }: { params?: { productId?: string } } = {}
 ) {
   try {
     console.log("Ada di API");

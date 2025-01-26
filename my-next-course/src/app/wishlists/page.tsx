@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import styles from "./styles.module.css";
 import { Wishlist } from "@/db/models/WishlistModel";
+import Image from "next/image";
 
 export default function WishlistsPage() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function WishlistsPage() {
     }
 
     if (isLoggedIn) fetchWishlist();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, wishlist]);
 
   // ✅ Handle remove from wishlist
   const handleRemove = async (productId: string) => {
@@ -85,7 +86,7 @@ export default function WishlistsPage() {
         <div className={styles.wishlistGrid}>
           {wishlist.map((item) => (
             <div key={item.product._id} className={styles.wishlistCard}>
-              <img src={item.product.thumbnail} alt={item.product.title} />
+              <Image src={item.product.thumbnail} alt={item.product.title} />
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{item.product.title}</h3>
                 <div className={styles.buttonGroup}>

@@ -6,11 +6,15 @@ import DetailCarousel from "@/components/DetailCarousel";
 import BackToProductsButton from "@/components/BackToProductsButton";
 import type { Metadata } from "next";
 
+interface ProductDetailPageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+}: ProductDetailPageProps): Promise<Metadata> {
   const db = await getDb();
   const product = await db.collection("courses").findOne({ slug: params.slug });
 
@@ -41,9 +45,7 @@ export async function generateMetadata({
 
 export default async function ProductDetailPage({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: ProductDetailPageProps) {
   const { slug } = params;
   const db = await getDb();
   const product = await db.collection("courses").findOne({ slug });
