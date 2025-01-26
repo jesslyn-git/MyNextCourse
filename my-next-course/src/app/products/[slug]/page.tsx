@@ -1,9 +1,7 @@
 import { getDb } from "@/db/config/mongodb";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import AddToWishlistButton from "@/components/AddToWishlistButton";
 import styles from "./page.module.css";
-import { Carousel } from "@material-tailwind/react";
 import DetailCarousel from "@/components/DetailCarousel";
 import BackToProductsButton from "@/components/BackToProductsButton";
 import type { Metadata } from "next";

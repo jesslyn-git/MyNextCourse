@@ -29,7 +29,7 @@ export default function AddToWishlistButton({ productId }: Props) {
       }
 
       toast.success("✅ Added to Wishlist!");
-    } catch (error: any) {
+    } catch (error) {
       toast.error(`❌ ${error.message || "Something went wrong"}`);
     } finally {
       setLoading(false);

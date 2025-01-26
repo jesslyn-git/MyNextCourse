@@ -6,7 +6,6 @@ import { SignJWT } from "jose";
 import { createSecretKey } from "crypto";
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
-const secretKey = createSecretKey(JWT_SECRET, "utf-8");
 
 export type LoginType = {
   email: string;

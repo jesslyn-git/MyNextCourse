@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import CardComponent from "@/components/Card";
 import styles from "./products.module.css";
 
-import { on } from "events";
-
 export default function ProductPage() {
   const router = useRouter();
   const [products, setProducts] = useState<any[]>([]);

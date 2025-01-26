@@ -1,7 +1,6 @@
 import "../styles/page.css";
 import Image from "next/image";
 import { Container, Row, Col } from "react-bootstrap";
-import CardComponent from "@/components/Card";
 import BannerCarousel from "@/components/homepage/BannerCarousel";
 import FeaturedSection from "@/components/homepage/FeaturedSection";
 import ScrollButton from "@/components/homepage/ScrollButton";

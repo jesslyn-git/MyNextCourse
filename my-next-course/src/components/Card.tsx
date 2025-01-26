@@ -20,7 +20,7 @@ interface CardComponentProps {
   onSeeDetail: () => void;
 }
 
-const CardComponent: React.FC<ProductCardProps> = ({
+const CardComponent: React.FC<CardComponentProps> = ({
   product,
   onAddToWishlist,
   onSeeDetail,

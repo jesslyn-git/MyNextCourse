@@ -19,7 +19,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const handleAuthChange = () => {
@@ -109,7 +109,7 @@ export default function LoginPage() {
 
           <Typography variant="small" className="mt-2 text-center">
             <>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/register"
                 className="font-bold text-blue-500 hover:text-blue-700"

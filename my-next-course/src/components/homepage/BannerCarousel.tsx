@@ -8,7 +8,7 @@ export default function BannerCarousel() {
     <div className="bg-gray-400 py-8">
       <div>
         <h1 className="flex py-5 lg:px-20 md:px-10 px-5 font-bold text-4xl text-gray-800 text-center">
-          What's On:
+          What&apos;s On:
         </h1>
       </div>
       <Row>
