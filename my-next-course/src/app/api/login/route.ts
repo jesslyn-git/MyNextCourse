@@ -5,9 +5,9 @@ export async function POST(req: Request) {
   try {
     const body: LoginType = await req.json();
 
-    const token = await UserModel.login(body);
+    const { token, name } = await UserModel.login(body);
 
-    const response = NextResponse.json({ token });
+    const response = NextResponse.json({ token, name });
     response.cookies.set("access_token", token);
 
     return response;

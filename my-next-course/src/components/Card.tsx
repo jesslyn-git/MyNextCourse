@@ -53,7 +53,7 @@ const CardComponent: React.FC<ProductCardProps> = ({
           {product.excerpt}
         </Typography>
       </CardBody>
-      <CardFooter className="pt-0">
+      <CardFooter className="pt-0 flex flex-col gap-2">
         <Button
           ripple={false}
           fullWidth={true}

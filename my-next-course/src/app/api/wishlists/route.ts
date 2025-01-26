@@ -84,27 +84,3 @@ export async function GET(req: NextRequest) {
     );
   }
 }
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { productId: string } }
-) {
-  try {
-    const userId = req.headers.get("x-user-id");
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const db = await getDb();
-    await db
-      .collection("wishlists")
-      .deleteOne({ userId, productId: params.productId });
-
-    return NextResponse.json({ message: "Wishlist item removed" });
-  } catch (error) {
-    console.log("🚀 ~ error:", error);
-    return NextResponse.json(
-      { error: "Failed to remove wishlist item" },
-      { status: 500 }
-    );
-  }
-}

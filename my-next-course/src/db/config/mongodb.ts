@@ -1,11 +1,9 @@
 import { Db, MongoClient } from "mongodb";
 import { dummyCourses } from "@/data/dummyCourses";
 
-const uri =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://jesslynaudrey30:Admin123@cluster0.tu8wh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.MONGODB_URI;
 console.log("🚀 ~ uri:", uri);
-const dbName = process.env.DB_NAME || "my-next-course";
+const dbName = process.env.DB_NAME;
 console.log("🚀 ~ dbName:", dbName);
 
 let client: MongoClient | null = null;

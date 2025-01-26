@@ -5,12 +5,9 @@ import { Carousel } from "@material-tailwind/react";
 
 export default function BannerCarousel() {
   return (
-    <div style={{ backgroundColor: "grey" }}>
-      <div style={{}}>
-        <h1
-          className="flex py-5 lg:px-20 md:px-10 px-5 font-bold text-4xl text-gray-800 text-center"
-          style={{ margin: "0px" }}
-        >
+    <div className="bg-gray-400 py-8">
+      <div>
+        <h1 className="flex py-5 lg:px-20 md:px-10 px-5 font-bold text-4xl text-gray-800 text-center">
           What's On:
         </h1>
       </div>
@@ -19,62 +16,69 @@ export default function BannerCarousel() {
           <Carousel
             className="rounded-xl w-full max-w-screen-lg"
             style={{
-              height: "300px",
-              // marginBottom: "20px",
+              height: "400px",
+              position: "relative",
+              zIndex: 0,
             }}
           >
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/1.png"
                 alt="image 1"
-                className="mx-auto object-cover"
-                width={600}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/2.png"
                 alt="image 2"
-                className="mx-auto object-cover"
-                width={500}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/3.png"
                 alt="image 3"
-                className="mx-auto object-cover"
-                width={500}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/1.png"
                 alt="image 1"
-                className="mx-auto object-cover"
-                width={600}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/2.png"
                 alt="image 2"
-                className="mx-auto object-cover"
-                width={500}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <Image
                 src="/banner/3.png"
                 alt="image 3"
-                className="mx-auto object-cover"
-                width={500}
-                height={300}
+                className="w-full h-full object-cover"
+                width={1200}
+                height={400}
+                priority
               />
             </div>
           </Carousel>

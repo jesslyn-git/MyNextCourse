@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import styles from "./styles.module.css";
 
 export default function WishlistsPage() {
   const router = useRouter();
@@ -47,6 +48,8 @@ export default function WishlistsPage() {
   // ✅ Handle remove from wishlist
   const handleRemove = async (productId: string) => {
     try {
+      console.log("Ada di handle remove");
+
       const res = await fetch(`/api/wishlists/${productId}`, {
         method: "DELETE",
         credentials: "include",
@@ -63,32 +66,44 @@ export default function WishlistsPage() {
   };
 
   if (!isLoggedIn) {
-    return <p>Please login to view your wishlist.</p>;
+    return (
+      <p className={styles.loginPrompt}>Please login to view your wishlist.</p>
+    );
   }
 
   if (loading) {
-    return <p>Loading wishlist...</p>;
+    return <p className={styles.loadingText}>Loading wishlist...</p>;
   }
 
   return (
-    <div className="container">
-      <h1>Your Wishlists</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Your Wishlists</h1>
       {wishlist.length === 0 ? (
-        <p>Your wishlist is empty.</p>
+        <p className={styles.loginPrompt}>Your wishlist is empty.</p>
       ) : (
-        <div className="wishlist-grid">
+        <div className={styles.wishlistGrid}>
           {wishlist.map((item) => (
-            <div key={item.product._id} className="wishlist-card">
+            <div key={item.product._id} className={styles.wishlistCard}>
               <img src={item.product.thumbnail} alt={item.product.title} />
-              <h3>{item.product.title}</h3>
-              <button onClick={() => handleRemove(item.product._id)}>
-                ❌ Remove
-              </button>
-              <button
-                onClick={() => router.push(`/products/${item.product.slug}`)}
-              >
-                View Product
-              </button>
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{item.product.title}</h3>
+                <div className={styles.buttonGroup}>
+                  <button
+                    className={styles.removeButton}
+                    onClick={() => handleRemove(item.product._id)}
+                  >
+                    ❌ Remove
+                  </button>
+                  <button
+                    className={styles.viewButton}
+                    onClick={() =>
+                      router.push(`/products/${item.product.slug}`)
+                    }
+                  >
+                    View Product
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

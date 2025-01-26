@@ -6,6 +6,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardComponent from "@/components/Card";
+import styles from "./products.module.css";
+
 import { on } from "events";
 
 export default function ProductPage() {
@@ -93,14 +95,14 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Product Listings</h1>
 
       {/* ✅ Search Bar */}
       <input
         type="text"
         placeholder="Search products..."
-        className="search-input"
+        className={styles.searchInput}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
@@ -110,9 +112,9 @@ export default function ProductPage() {
         dataLength={products.length}
         next={() => fetchProducts(page)}
         hasMore={hasMore}
-        loader={<h4>Loading more products...</h4>}
+        loader={<h4 className={styles.loader}>Loading more products...</h4>}
       >
-        <div className="product-grid">
+        <div className={styles.productGrid}>
           {products.map((product) => (
             <CardComponent
               key={product._id}

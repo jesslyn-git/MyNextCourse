@@ -4,5 +4,13 @@ import React, { createContext } from "react";
 import { Button } from "@material-tailwind/react";
 
 export default function ScrollButton() {
-  <Button className="primary-button">Start Your Learning Adventure</Button>;
+  const scrollToFeatured = () => {
+    const featuredSection = document.getElementById("featured-courses");
+    featuredSection?.scrollIntoView({ behavior: "smooth" });
+  };
+  return (
+    <Button className="primary-button" onClick={scrollToFeatured}>
+      Start Your Learning Adventure
+    </Button>
+  );
 }

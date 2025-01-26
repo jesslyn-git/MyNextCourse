@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
 import { createSecretKey } from "crypto";
 
-const JWT_SECRET = process.env.JWT_SECRET_KEY || "rahasia"; // Use .env
+const JWT_SECRET = process.env.JWT_SECRET_KEY;
 const secretKey = createSecretKey(JWT_SECRET, "utf-8");
 
 export type LoginType = {
@@ -22,11 +22,13 @@ export type User = {
 
 const UserValidation = z.object({
   name: z.string().min(1, "Name is required"),
-  username: z.string().min(1, "Username is required"),
+  username: z
+    .string()
+    .min(1, "Username is required")
+    .refine((s) => !s.includes(" "), "No Spaces!"),
   email: z.string().email("Invalid email format"),
   password: z.string().min(5, "Password must be at least 5 characters"),
 });
-
 export default class UserModel {
   static async getCollection() {
     const db = await getDb();
@@ -88,7 +90,9 @@ export default class UserModel {
     }
   }
 
-  static async login(payload: LoginType): Promise<string> {
+  static async login(
+    payload: LoginType
+  ): Promise<{ token: string; name: string }> {
     const loginValidation = z.object({
       email: z.string().email(),
       password: z.string().min(5),
@@ -116,6 +120,8 @@ export default class UserModel {
       .setExpirationTime("7d")
       .sign(encodedSecret);
 
-    return token;
+    console.log("🚀 ~ UserModel ~ login ~ token:", token);
+    const name = user.name;
+    return { token, name };
   }
 }

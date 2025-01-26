@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const secret = new TextEncoder().encode("rahasia");
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
     const { payload } = await jwtVerify(token, secret);
 
     const requestHeaders = new Headers(request.headers);

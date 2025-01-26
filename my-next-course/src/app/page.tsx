@@ -6,12 +6,12 @@ import BannerCarousel from "@/components/homepage/BannerCarousel";
 import FeaturedSection from "@/components/homepage/FeaturedSection";
 import ScrollButton from "@/components/homepage/ScrollButton";
 
-const Hero = ({ scrollToProductList }) => {
+const Hero = () => {
   return (
     <>
       <div className="hero-container">
         <Container>
-          <Row className="align-items-start">
+          <Row className="align-items-center">
             {/* Text Section */}
             <Col md={6} className="hero-text-column">
               <div className="hero-content">
@@ -29,13 +29,14 @@ const Hero = ({ scrollToProductList }) => {
         </Container>
         <Container>
           {/* Image Section */}
-          <Col md={6} className="hero-image-column">
+          <Col md={6} className="hero-image-column text-center">
             <Image
               src="/images/heroImg.png"
               alt="Hero Image"
-              width={200}
-              height={200}
-              className="hero-image"
+              width={350}
+              height={350}
+              className="hero-image image-fluid"
+              priority
             />
           </Col>
         </Container>
@@ -47,5 +48,4 @@ const Hero = ({ scrollToProductList }) => {
     </>
   );
 };
-
 export default Hero;
