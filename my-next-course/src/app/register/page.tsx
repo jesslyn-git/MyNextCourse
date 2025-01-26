@@ -137,7 +137,13 @@ export default function RegisterPage() {
             color="blue-gray"
             className="flex items-center justify-center gap-3"
           >
-            <Image src="/google.svg" alt="google" className="h-5 w-5" />
+            <Image
+              src="/google.svg"
+              alt="google"
+              className="h-5 w-5"
+              width={20}
+              height={20}
+            />
             Continue with Google
           </Button>
         </CardBody>

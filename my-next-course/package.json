@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@material-tailwind/react": "^2.1.10",
+    "@material-tailwind/react": "^2.1.9",
     "@mui/material": "^6.4.0",
     "bcrypt": "^5.1.1",
     "fs": "^0.0.1-security",

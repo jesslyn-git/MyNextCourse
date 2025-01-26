@@ -6,15 +6,14 @@ import DetailCarousel from "@/components/DetailCarousel";
 import BackToProductsButton from "@/components/BackToProductsButton";
 import type { Metadata } from "next";
 
-interface ProductDetailPageProps {
-  params: {
-    slug: string;
-  };
-}
+// interface ProductDetailPageProps {
+//   params: {
+//     slug: Promise<string>;
+//   };
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+// }
 
-export async function generateMetadata({
-  params,
-}: ProductDetailPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }): Promise<Metadata> {
   const db = await getDb();
   const product = await db.collection("courses").findOne({ slug: params.slug });
 
@@ -43,9 +42,19 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductDetailPage({
-  params,
-}: ProductDetailPageProps) {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const db = await getDb();
+  const products = await db
+    .collection("courses")
+    .find({}, { projection: { slug: 1 } })
+    .toArray();
+
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
+
+export default async function ProductDetailPage({ params }) {
   const { slug } = params;
   const db = await getDb();
   const product = await db.collection("courses").findOne({ slug });

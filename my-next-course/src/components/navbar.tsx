@@ -3,19 +3,22 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import ExploreAllButton from "./ExploreAllButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const user = localStorage.getItem("user") || "";
-  console.log("🚀 ~ Navbar ~ user:", user);
+  const [user, setUser] = useState<string>("");
 
   useEffect(() => {
     const checkAuthStatus = () => {
-      const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
-      setIsLoggedIn(isAuthenticated);
+      if (typeof window !== "undefined") {
+        // ✅ Ensure localStorage is accessible
+        const isAuthenticated = localStorage.getItem("isLoggedIn") === "true";
+        setIsLoggedIn(isAuthenticated);
+        setUser(localStorage.getItem("user") || ""); // ✅ Fetch user safely
+      }
     };
 
     checkAuthStatus();

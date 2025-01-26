@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import styles from "./styles.module.css";
-import { Wishlist } from "@/db/models/WishlistModel";
 import Image from "next/image";
+import { Course } from "@/db/models/CourseModel";
 
 export default function WishlistsPage() {
   const router = useRouter();
-  const [wishlist, setWishlist] = useState<Wishlist[]>([]);
+  const [wishlist, setWishlist] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -86,7 +86,12 @@ export default function WishlistsPage() {
         <div className={styles.wishlistGrid}>
           {wishlist.map((item) => (
             <div key={item.product._id} className={styles.wishlistCard}>
-              <Image src={item.product.thumbnail} alt={item.product.title} />
+              <Image
+                src={item.product.thumbnail}
+                alt={item.product.title}
+                width={200}
+                height={200}
+              />
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{item.product.title}</h3>
                 <div className={styles.buttonGroup}>

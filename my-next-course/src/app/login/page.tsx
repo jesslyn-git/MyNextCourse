@@ -17,8 +17,8 @@ import Image from "next/image";
 export default function LoginPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "testuser1@mail.com",
+    password: "123456",
   });
   const [, setIsLoggedIn] = useState(false);
 
@@ -145,7 +145,13 @@ export default function LoginPage() {
             color="blue-gray"
             className="flex items-center justify-center gap-3"
           >
-            <Image src="/google.svg" alt="google" className="h-5 w-5" />
+            <Image
+              src="/google.svg"
+              alt="google"
+              className="h-5 w-5"
+              width={20}
+              height={20}
+            />
             Continue with Google
           </Button>
         </CardBody>
