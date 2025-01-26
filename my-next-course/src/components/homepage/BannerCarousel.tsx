@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { Row } from "react-bootstrap";
 import { Carousel } from "@material-tailwind/react";
 
 export default function BannerCarousel() {
@@ -11,7 +10,9 @@ export default function BannerCarousel() {
           What&apos;s On:
         </h1>
       </div>
-      <Row>
+      <div className="w-full px-4">
+        {" "}
+        {/* This replaces the Row component */}
         <div className="flex justify-center items-center">
           <Carousel
             className="rounded-xl w-full max-w-screen-lg"
@@ -83,7 +84,7 @@ export default function BannerCarousel() {
             </div>
           </Carousel>
         </div>
-      </Row>
+      </div>
     </div>
   );
 }
