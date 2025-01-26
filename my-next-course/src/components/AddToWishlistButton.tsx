@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { toast } from "react-toastify";
+import dotenv from "dotenv";
+dotenv.config();
 
 type Props = {
   productId: string;
@@ -10,12 +12,12 @@ type Props = {
 
 export default function AddToWishlistButton({ productId }: Props) {
   const [loading, setLoading] = useState(false);
-
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
   const handleAdd = async () => {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/wishlists", {
+      const res = await fetch(`${BASE_URL}/api/wishlists`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId }),

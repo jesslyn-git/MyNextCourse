@@ -1,5 +1,7 @@
 import { Db, MongoClient } from "mongodb";
 import { dummyCourses } from "@/data/dummyCourses";
+import dotenv from "dotenv";
+dotenv.config();
 
 const uri = process.env.MONGODB_URI;
 console.log("🚀 ~ uri:", uri);

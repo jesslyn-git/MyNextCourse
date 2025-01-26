@@ -5,11 +5,14 @@ import { toast } from "react-toastify";
 import ExploreAllButton from "./ExploreAllButton";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [user, setUser] = useState<string>("");
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
     const checkAuthStatus = () => {
@@ -39,7 +42,7 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    const resp = await fetch("/api/logout", {
+    const resp = await fetch(`${BASE_URL}/api/logout`, {
       method: "POST",
     });
     if (resp.ok) {

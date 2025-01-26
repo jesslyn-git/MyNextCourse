@@ -13,8 +13,12 @@ import {
   CardBody,
 } from "@material-tailwind/react";
 import Image from "next/image";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function LoginPage() {
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "testuser1@mail.com",
@@ -46,7 +50,7 @@ export default function LoginPage() {
     console.log("🚀 ~ handleChange ~ formData:", formData);
     e.preventDefault();
 
-    const resp = await fetch("/api/login", {
+    const resp = await fetch(`${BASE_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

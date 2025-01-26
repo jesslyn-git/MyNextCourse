@@ -3,6 +3,8 @@ import { getDb } from "../config/mongodb";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
+import dotenv from "dotenv";
+dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET_KEY;
 

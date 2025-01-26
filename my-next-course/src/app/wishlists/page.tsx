@@ -6,12 +6,15 @@ import { toast } from "react-toastify";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { Course } from "@/db/models/CourseModel";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function WishlistsPage() {
   const router = useRouter();
   const [wishlist, setWishlist] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   // ✅ Check if user is logged in (JWT stored in cookies)
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function WishlistsPage() {
   useEffect(() => {
     async function fetchWishlist() {
       try {
-        const res = await fetch("/api/wishlists", {
+        const res = await fetch(`${BASE_URL}/api/wishlists`, {
           method: "GET",
           credentials: "include", // ✅ Ensures cookies are sent
         });
@@ -52,7 +55,7 @@ export default function WishlistsPage() {
     try {
       console.log("Ada di handle remove");
 
-      const res = await fetch(`/api/wishlists/${productId}`, {
+      const res = await fetch(`${BASE_URL}/api/wishlists/${productId}`, {
         method: "DELETE",
         credentials: "include",
       });

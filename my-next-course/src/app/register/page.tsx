@@ -13,6 +13,8 @@ import {
 } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -22,6 +24,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +33,7 @@ export default function RegisterPage() {
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
 
-    const resp = await fetch("/api/register", {
+    const resp = await fetch(`${BASE_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

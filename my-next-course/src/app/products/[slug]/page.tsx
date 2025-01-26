@@ -42,17 +42,17 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const db = await getDb();
-  const products = await db
-    .collection("courses")
-    .find({}, { projection: { slug: 1 } })
-    .toArray();
+// export async function generateStaticParams(): Promise<{ slug: string }[]> {
+//   const db = await getDb();
+//   const products = await db
+//     .collection("courses")
+//     .find({}, { projection: { slug: 1 } })
+//     .toArray();
 
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
-}
+//   return products.map((product) => ({
+//     slug: product.slug,
+//   }));
+// }
 
 export default async function ProductDetailPage({ params }) {
   const { slug } = params;

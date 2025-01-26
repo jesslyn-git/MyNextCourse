@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import { FooterWithSocialLinks } from "@/components/footer";
 import { ToastContainer } from "react-toastify";
+import dotenv from "dotenv";
+dotenv.config();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

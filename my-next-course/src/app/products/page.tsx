@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import CardComponent from "@/components/Card";
 import styles from "./products.module.css";
 import { Course } from "@/db/models/CourseModel";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default function ProductPage() {
   const router = useRouter();
@@ -16,6 +18,7 @@ export default function ProductPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
   //   console.log(document.cookie, ">>> ini cookie");
 
@@ -34,7 +37,7 @@ export default function ProductPage() {
         console.log("trying to fetch");
 
         const res = await fetch(
-          `/api/courses?page=${currentPage}&limit=6&search=${searchQuery}`,
+          `${BASE_URL}/api/courses?page=${currentPage}&limit=6&search=${searchQuery}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -77,7 +80,7 @@ export default function ProductPage() {
     }
 
     try {
-      const res = await fetch("/api/wishlists", {
+      const res = await fetch(`${BASE_URL}/api/wishlists`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productId }),
