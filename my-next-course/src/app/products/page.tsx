@@ -20,8 +20,6 @@ export default function ProductPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
-  //   console.log(document.cookie, ">>> ini cookie");
-
   // ✅ Check login status using cookies
   useEffect(() => {
     const token = document.cookie
